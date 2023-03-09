@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import locationIcon from "./pin.png";
 import weatherIcon from "./clear-day-icon.svg";
 
 export const WeatherComponent = () => {
   const [temp, setTemp] = useState(70);
   const [weatherDescription, setWeatherDescription] = useState("");
-  const [country, setCountry] = useState("");
+  //   const [country, setCountry] = useState("");
   const [placeName, setPlaceName] = useState("");
   //   const [weatherIcon, setWeatherIcon] = useState(null);
   const [date, setDate] = useState("");
