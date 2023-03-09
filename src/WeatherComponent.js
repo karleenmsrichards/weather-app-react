@@ -19,7 +19,7 @@ export const WeatherComponent = () => {
         const lat = position.coords.latitude;
 
         fetch(
-          `http://api.weatherapi.com/v1/forecast.json?key=%204c0e921f27e842289ef203706230803&q=${lat},${long}&days=1&aqi=no&alerts=no`
+          `https://api.weatherapi.com/v1/forecast.json?key=%204c0e921f27e842289ef203706230803&q=${lat},${long}&days=1&aqi=no&alerts=no`
         )
           .then((response) => {
             if (!response.ok) {
