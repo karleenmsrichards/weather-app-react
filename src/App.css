@@ -1,38 +1,97 @@
+
+* {
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+
 .App {
-  text-align: center;
+  width: 100%;
+  height: 100vh;
+  border: 2px dotted red;
+  color: #171515;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.weather-content-wrapper {
+  border: 2px dotted blue;
+  width: 100%;
+  height: 100vh;
+}
+.primary-weather-content-wrapper {
+  padding: 15% 0 5% 7%;
+  display: grid;
+  row-gap: 10px;
+  grid-template-areas: 
+  "temp ."
+  "description ."
+  ". image";
+  grid-template-columns: .5fr 1fr;
+  border: 2px dotted lime;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.primary-temp {
+  grid-area: temp;
+  font-size: 40px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.primary-weather-description {
+  grid-area: description;
+}
+
+.primary-weather-icon-wrapper {
+  grid-area: image;
+  width: 100%;
+  border: 2px dotted red;
+}
+
+.primary-weather-icon {
+width: 100%;
+display: block;
+
+
+}
+
+.secondary-weather-content-wrapper {
+  background-color: rgb(164, 164, 241);
+  padding-left: 20px;
+}
+
+.secondary-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 3px;
+  padding: 5% 0;
+  border: 2px dotted lime;
+
 }
 
-.App-link {
-  color: #61dafb;
+.secondary-place-name {
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+hr.secondary-hline {
+  width: 20%;
+  border: .5px solid #171515;
+}
+
+.additional-content {
+  display: grid;
+  grid-template-areas: 
+  "rain humidity uv";
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 12px;
+  padding: 5% 0 8% 0;
+}
+
+.additional-chance-of-rain-wrapper {
+  grid-area: rain;
+}
+
+
+.additional-humidity-wrapper {
+  grid-area: humidity;
+}
+
+.additional-uv-wrapper {
+  grid-area: uv;
 }
