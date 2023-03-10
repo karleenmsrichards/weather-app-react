@@ -5,43 +5,54 @@ padding: 0;
 margin: 0;
 }
 
-.App {
-  width: 100%;
-  height: 100vh;
-  border: 2px dotted red;
-  color: #171515;
+body {
+  min-height: 100vh;
+  color: white;
 }
 
-.weather-content-wrapper {
-  border: 2px dotted blue;
+.App {
   width: 100%;
-  height: 100vh;
 }
+
+.night-background {
+  background: url("https://cdn.pixabay.com/photo/2017/08/24/03/41/starry-sky-2675322__480.jpg") no-repeat center center fixed; 
+  background-size: cover;
+  padding: 0;
+  border: 4px dotted orange;
+}
+
+.day-background {
+  background: url("https://cdn.pixabay.com/photo/2017/12/31/15/39/marine-3052592__480.jpg") no-repeat center center fixed; 
+  background-size: cover;
+  padding: 0;
+}
+
+
 .primary-weather-content-wrapper {
-  padding: 15% 0 5% 7%;
+  padding: 20% 0 12% 7%;
   display: grid;
   row-gap: 10px;
   grid-template-areas: 
-  "temp ."
-  "description ."
+  "temp image"
+  "description image"
   ". image";
   grid-template-columns: .5fr 1fr;
-  border: 2px dotted lime;
 }
 
 .primary-temp {
   grid-area: temp;
-  font-size: 40px;
+  font-size: 60px;
+  font-weight: bold;
 }
 
 .primary-weather-description {
   grid-area: description;
+  font-weight: bold;
 }
 
 .primary-weather-icon-wrapper {
   grid-area: image;
   width: 100%;
-  border: 2px dotted red;
 }
 
 .primary-weather-icon {
@@ -52,46 +63,69 @@ display: block;
 }
 
 .secondary-weather-content-wrapper {
-  background-color: rgb(164, 164, 241);
-  padding-left: 20px;
+  background: "135 deg, rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0)";
+  box-shadow: rgba(37, 37, 41, 0.2) 0px -7px 29px 0px;
+  backdrop-filter: blur(50px);
+  /* background-color: white; */
+  /* color: black; */
+  padding-bottom: 7%;
 }
 
-.secondary-content {
+
+.secondary-a-content {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 5% 0;
-  border: 2px dotted lime;
-
+  padding: 10% 0;
+  padding-left: 7%;
 }
 
-.secondary-place-name {
+.secondary-a-place-name {
   font-weight: bold;
 }
 
-hr.secondary-hline {
+hr.secondary-a-hline {
   width: 20%;
-  border: .5px solid #171515;
+  border: .5px solid rgb(36, 121, 231);
 }
 
-.additional-content {
+.secondary-b-content {
   display: grid;
   grid-template-areas: 
   "rain humidity uv";
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: start;
+  align-items: start;
+  column-gap: 0;
   font-size: 12px;
-  padding: 5% 0 8% 0;
+  padding: 5% 0 0 7%;
+  text-align: center;
+/* border: 2px dotted red; */
 }
 
-.additional-chance-of-rain-wrapper {
+.secondary-b-chance-of-rain-wrapper {
   grid-area: rain;
+  border-right: 1px solid rgb(36, 121, 231);
+  padding: 0 20% 0 0;
 }
 
 
-.additional-humidity-wrapper {
+.secondary-b-humidity-wrapper {
   grid-area: humidity;
+  border-right: 1px solid rgb(36, 121, 231);
+  padding: 0 22% 0 20%;
+
 }
 
-.additional-uv-wrapper {
+.secondary-b-uv-wrapper {
   grid-area: uv;
+  padding-left: 20%;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.secondary-c-content {
+  margin-top: 30px;
 }

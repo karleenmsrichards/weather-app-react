@@ -1,22 +1,38 @@
 import { useEffect, useState } from "react";
-import weatherIcon from "./clear-day-icon.svg";
+import { PrimaryComponent } from "./PrimaryComponent";
+import { SecondaryComponentA } from "./SecondaryComponentA";
+import { SecondaryComponentB } from "./SecondaryComponentB";
 
 export const WeatherComponent = () => {
   const [temp, setTemp] = useState(70);
   const [weatherDescription, setWeatherDescription] = useState("");
-  //   const [country, setCountry] = useState("");
+  const [weatherCode, setWeatherCode] = useState(0);
   const [placeName, setPlaceName] = useState("");
-  //   const [weatherIcon, setWeatherIcon] = useState(null);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(null);
   const [chanceOfRain, setChanceOfRain] = useState("");
   const [humidity, setHumidity] = useState("");
   const [uv, setUv] = useState("");
+  const [TimeArr, setTimeArr] = useState([]);
+
+  //   const [timestamp, setTimestamp] = null;
+  //   const [day1, setDay1] = useState("");
+  //   const [day1Icon, setDay1Icon] = useState(null);
+  //   const [temp1, setTemp1] = useState();
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
         const lat = position.coords.latitude;
+        const timestamp = position?.timestamp;
+        // console.log(moment(localTime * 10));
+        // let localTime = new Date(timestamp).toLocaleTimeString("default", {
+        //   weekday: "long",
+        //   month: "long",
+        //   year: "numeric",
+        // });
+        let localTime = new Date(timestamp).toLocaleTimeString();
+        setTimeArr(localTime.split(":"));
 
         fetch(
           `https://api.weatherapi.com/v1/forecast.json?key=%204c0e921f27e842289ef203706230803&q=${lat},${long}&days=1&aqi=no&alerts=no`
@@ -28,15 +44,14 @@ export const WeatherComponent = () => {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
-            const temp = data.current.temp_c;
+            const temp = data?.current?.temp_c;
             setTemp(temp);
 
-            const weatherDescription = data.current.condition.text;
+            const weatherDescription = data?.current?.condition?.text;
             setWeatherDescription(weatherDescription);
 
-            // const weatherIcon = data.current.condition.icon;
-            // setWeatherIcon(weatherIcon);
+            const weatherCode = data?.current?.condition?.code;
+            setWeatherCode(weatherCode);
 
             const chanceOfRain =
               data?.forecast?.forecastday[0]?.day?.daily_chance_of_rain;
@@ -46,13 +61,13 @@ export const WeatherComponent = () => {
             const humidity = data?.current?.humidity;
             setHumidity(humidity);
 
-            const uv = data?.forecast?.forecastday[0]?.day?.uv;
-            setUv(uv);
+            const uv = data?.current?.uv;
+            setUv(uv.toFixed(2));
 
-            const date = data.location.localtime;
+            const date = data?.location?.localtime;
             setDate(date);
 
-            const placeName = data.location.name;
+            const placeName = data?.location?.name;
             setPlaceName(placeName);
           })
           .catch((err) => err);
@@ -61,38 +76,21 @@ export const WeatherComponent = () => {
   }, []);
 
   return (
-    <div className="weather-content-wrapper">
-      <div className="primary-weather-content-wrapper">
-        <h1 className="primary-temp">{temp}°</h1>
-        <p className="primary-weather-description">{weatherDescription}</p>
-        <div className="primary-weather-icon-wrapper">
-          <img
-            className="primary-weather-icon"
-            alt="weather icon"
-            src={weatherIcon}
-          />
-        </div>
-      </div>
+    <div className={TimeArr[0] > 18 ? "night-background" : "day-background"}>
+      <PrimaryComponent
+        weatherDescription={weatherDescription}
+        temp={temp}
+        weatherCode={weatherCode}
+        TimeArr={TimeArr}
+      />
+
       <div className="secondary-weather-content-wrapper">
-        <div className="secondary-content">
-          <p className="secondary-place-name">{placeName}</p>
-          <hr className="secondary-hline"></hr>
-          <p className="secondary-date">{date}</p>
-        </div>
-        <div className="additional-content">
-          <div className="additional-chance-of-rain-wrapper">
-            <p>CHANCE OF RAIN</p>
-            <p className="additional-chance-of-rain">{chanceOfRain}%</p>
-          </div>
-          <div>
-            <p className="additional-humidity-wrapper">HUMIDITY</p>
-            <p className="additional-humidity">{humidity}%</p>
-          </div>
-          <div className="additional-uv-wrapper">
-            <p>UV</p>
-            <p>{uv}</p>
-          </div>
-        </div>
+        <SecondaryComponentA placeName={placeName} date={date} />
+        <SecondaryComponentB
+          uv={uv}
+          chanceOfRain={chanceOfRain}
+          humidity={humidity}
+        />
       </div>
     </div>
   );
