@@ -8,41 +8,71 @@ margin: 0;
 body {
   min-height: 100vh;
   color: white;
+  text-align: center;
 }
 
-.App {
-  width: 100%;
+@media only screen and (min-width: 375px) {
+  .body-night-background {
+    width: 100%;
+    height: 100%;
+    padding-top: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #04302f;
+}
+
+.body-day-background {
+  background-color: #63b8f1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 }
 
 .night-background {
-  background: url("https://cdn.pixabay.com/photo/2017/08/24/03/41/starry-sky-2675322__480.jpg") no-repeat center center fixed; 
+  background: url("https://cdn.pixabay.com/photo/2017/08/10/04/39/stars-2618250__480.jpg") no-repeat center center fixed; 
   background-size: cover;
-  padding: 0;
-  border: 4px dotted orange;
+  box-shadow: rgba(123, 123, 132, 0.2) 0px -7px 29px 0px;
+  padding-bottom: 10%;
 }
 
 .day-background {
-  background: url("https://cdn.pixabay.com/photo/2017/12/31/15/39/marine-3052592__480.jpg") no-repeat center center fixed; 
+  background: url("https://cdn.pixabay.com/photo/2014/04/05/11/39/beach-316538__480.jpg") no-repeat center center fixed; 
   background-size: cover;
-  padding: 0;
+  box-shadow: rgba(37, 37, 41, 0.2) 0px -7px 29px 0px;
+  padding-bottom: 10%;
 }
 
-
 .primary-weather-content-wrapper {
-  padding: 20% 0 12% 7%;
+  padding: 20% 0 12% 10%;
   display: grid;
   row-gap: 10px;
+  text-align: left;
   grid-template-areas: 
-  "temp image"
+  "tempC image"
+  "realFeel image"
   "description image"
   ". image";
   grid-template-columns: .5fr 1fr;
 }
 
-.primary-temp {
-  grid-area: temp;
+.primary-tempCelcius {
+  grid-area: tempC;
   font-size: 60px;
   font-weight: bold;
+}
+
+.real-feel {
+  grid-area: realFeel;
+  color: rgb(36, 121, 231);
+  font-weight: bold;
+}
+
+
+h2 {
+  color: rgb(36, 121, 231);
+  padding-bottom: 20px;
 }
 
 .primary-weather-description {
@@ -58,35 +88,43 @@ body {
 .primary-weather-icon {
 width: 100%;
 display: block;
-
-
 }
 
 .secondary-weather-content-wrapper {
   background: "135 deg, rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0)";
-  box-shadow: rgba(37, 37, 41, 0.2) 0px -7px 29px 0px;
-  backdrop-filter: blur(50px);
+  box-shadow: rgba(123, 123, 132, 0.2) 0px -7px 29px 0px;
+  backdrop-filter: blur(30px);
   /* background-color: white; */
   /* color: black; */
   padding-bottom: 7%;
+  margin: 0 10px;
 }
-
 
 .secondary-a-content {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 10% 0;
+  padding: 10% 8% 8% 10%;
   padding-left: 7%;
+}
+
+.secondary-a-location-icon {
+  width: 16px;
 }
 
 .secondary-a-place-name {
   font-weight: bold;
+  font-size: 20px;
+  color: rgb(36, 121, 231);
 }
 
 hr.secondary-a-hline {
-  width: 20%;
-  border: .5px solid rgb(36, 121, 231);
+  border: .5px solid rgb(241, 241, 246);
+  margin: 5px 0;
+}
+
+.secondary-a-date {
+  font-weight: bold;
 }
 
 .secondary-b-content {
@@ -98,23 +136,34 @@ hr.secondary-a-hline {
   align-items: start;
   column-gap: 0;
   font-size: 12px;
-  padding: 5% 0 0 7%;
+  padding: 5% 0 0 5%;
   text-align: center;
 /* border: 2px dotted red; */
 }
 
 .secondary-b-chance-of-rain-wrapper {
   grid-area: rain;
-  border-right: 1px solid rgb(36, 121, 231);
+  border-right: .5px solid rgb(241, 241, 246);
   padding: 0 20% 0 0;
 }
 
+@media only screen and (min-width: 375px) {
+  .secondary-b-chance-of-rain-wrapper {
+    padding: 0 27% 0 0;
+  }
+}
 
 .secondary-b-humidity-wrapper {
   grid-area: humidity;
-  border-right: 1px solid rgb(36, 121, 231);
-  padding: 0 22% 0 20%;
+  border-right: .5px solid rgb(241, 241, 246);
+  padding: 0 25% 0 20%;
 
+}
+
+@media only screen and (min-width: 375px) {
+  .secondary-b-humidity-wrapper {
+    padding: 0 27% 0 20%;
+  }
 }
 
 .secondary-b-uv-wrapper {
@@ -124,8 +173,97 @@ hr.secondary-a-hline {
 
 .bold-text {
   font-weight: bold;
+  color: rgb(36, 121, 231);
 }
 
-.secondary-c-content {
+/* .secondary-c-content {
   margin-top: 30px;
+} */
+
+.astro-wrapper {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.astro-image {
+  width: 60px;
+}
+
+.astro-sun-wrapper {
+  background: "135 deg, rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0)";
+  box-shadow: rgba(123, 123, 132, 0.2) 0px -7px 29px 0px;
+  backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 5% 11%;
+}
+
+.astro-sun-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.astro-moon-wrapper {
+  background: "135 deg, rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0)";
+  box-shadow: rgba(154, 154, 162, 0.2) 0px -7px 29px 0px;
+  backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 5% 11%;
+}
+
+.astro-moon-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.astro-sunrise {
+  padding-bottom: 10px;
+}
+
+.astro-moonrise {
+  padding-bottom: 10px;
+}
+
+.astro-text {
+  color: rgb(36, 121, 231);
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.weather-days-content {
+  background: "135 deg, rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0)";
+  box-shadow: rgba(154, 154, 162, 0.2) 0px -7px 29px 0px;
+  backdrop-filter: blur(30px);
+  display: flex;
+  flex-direction: column;
+  padding: 7% 7% 5% 7%;
+  margin: 0 10px;
+}
+
+.weather-days-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 2%;
+}
+
+.weather-days-icon {
+  width: 60px;
+}
+
+.weather-days-border-bottom {
+  border-bottom: .5px solid rgb(241, 241, 246);
 }

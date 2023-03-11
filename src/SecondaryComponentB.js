@@ -12,7 +12,7 @@ export const SecondaryComponentB = ({ chanceOfRain, humidity, uv }) => {
       </div>
 
       <div className="secondary-b-uv-wrapper">
-        <p className="bold-text">UV</p>
+        <p className="bold-text">UV INDEX</p>
         <p>{uv}</p>
       </div>
     </div>
