@@ -13,7 +13,7 @@ export const PrimaryComponent = ({
   return (
     <div className="primary-weather-content-wrapper">
       <h1 className="primary-tempCelcius">{tempCelcius}°</h1>
-      <p className="real-feel">Feels like {realFeelC}°</p>
+      <p className="real-feel">FEELS LIKE {realFeelC}°</p>
       <h2 className="primary-weather-description">{weatherDescription}</h2>
       <div className="primary-weather-icon-wrapper">
         <img
