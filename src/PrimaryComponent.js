@@ -1,25 +1,37 @@
+import React from "react";
+import { useContext } from "react";
+import { apiContext } from "./WeatherComponent";
 import WeatherConditions from "./WeatherCondition.json";
 
-export const PrimaryComponent = ({
-  tempCelcius,
-  weatherDescription,
-  weatherCode,
-  isDay,
-  realFeelC,
-}) => {
-  let newArr = WeatherConditions.filter((item) => item.code === weatherCode);
+export const PrimaryComponent = () => {
+  const { APIResults } = useContext(apiContext);
 
-  // console.log(newArr[0].imageNight);
+  let weatherCondtion = WeatherConditions.filter(
+    (item) => item.code === APIResults?.current?.condition?.code
+  );
+
+  const [weatherIcon] = weatherCondtion;
+
   return (
     <div className="primary-weather-content-wrapper">
-      <h1 className="primary-tempCelcius">{tempCelcius}°</h1>
-      <p className="real-feel">FEELS LIKE {realFeelC}°</p>
-      <h2 className="primary-weather-description">{weatherDescription}</h2>
+      <div className="primary-weather-wrapper">
+        <h1 className="primary-tempCelcius">{APIResults?.current?.temp_c}°</h1>
+        <p className="real-feel">
+          FEELS LIKE {APIResults?.current?.feelslike_c}°
+        </p>
+        <h2 className="primary-weather-description">
+          {APIResults?.current?.condition?.text}
+        </h2>
+      </div>
       <div className="primary-weather-icon-wrapper">
         <img
           className="primary-weather-icon"
           alt="weather icon"
-          src={isDay === 0 ? newArr[0]?.imageNight : newArr[0]?.imageDay}
+          src={
+            APIResults?.current?.is_day === 0
+              ? weatherIcon?.imageNight
+              : weatherIcon?.imageDay
+          }
         />
       </div>
     </div>

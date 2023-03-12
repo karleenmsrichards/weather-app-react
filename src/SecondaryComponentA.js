@@ -1,6 +1,10 @@
 import locationIcon from "./location-icon.png";
+import React from "react";
+import { useContext } from "react";
+import { apiContext } from "./WeatherComponent";
 
-export const SecondaryComponentA = ({ placeName, date, country, region }) => {
+export const SecondaryComponentA = ({ date }) => {
+  const { APIResults } = useContext(apiContext);
   return (
     <div className="secondary-a-content">
       <p className="secondary-a-place-name">
@@ -9,10 +13,10 @@ export const SecondaryComponentA = ({ placeName, date, country, region }) => {
           src={locationIcon}
           alt="location icon"
         />{" "}
-        {placeName}
+        {APIResults?.location?.name}
       </p>
-      <p className="secondary-a-region">{region}</p>
-      <p className="secondary-a-region">{country}</p>
+      <p className="secondary-a-region">{APIResults?.location?.region}</p>
+      <p className="secondary-a-region">{APIResults?.location?.country}</p>
       <hr className="secondary-a-hline"></hr>
       <p className="secondary-a-date">{date}</p>
     </div>

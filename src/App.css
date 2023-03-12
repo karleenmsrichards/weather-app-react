@@ -53,16 +53,27 @@ body {
 }
 
 .primary-weather-content-wrapper {
-  padding: 20% 0 12% 10%;
+  padding: 15% 0 15% 10%;
   display: grid;
   row-gap: 10px;
   text-align: left;
   grid-template-areas: 
-  "tempC image"
-  "realFeel image"
-  "description image"
-  ". image";
-  grid-template-columns: .5fr 1fr;
+  "primary-weather-wrapper image";
+  grid-template-columns: .6fr 1fr;
+  align-items: center;
+  justify-items: center;
+  /* border: 2px dotted red; */
+}
+
+.primary-weather-wrapper {
+  grid-area: primary-weather-wrapper;
+  background: "135 deg, rgba(255, 255, 255, 0.1) rgba(255, 255, 255, 0)";
+  box-shadow: rgba(123, 123, 132, 0.2) 0px -7px 29px 0px;
+  backdrop-filter: blur(30px);
+  padding: 0 10%;
+  justify-self: center;
+  align-self: center;
+  /* border: 2px dotted red; */
 }
 
 .primary-tempCelcius {
@@ -90,6 +101,7 @@ h2 {
 .primary-weather-icon-wrapper {
   grid-area: image;
   width: 100%;
+  /* border: 2px dotted red; */
 }
 
 .primary-weather-icon {

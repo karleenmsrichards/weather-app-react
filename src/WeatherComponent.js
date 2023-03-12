@@ -8,6 +8,7 @@ import { LoadingPage } from "./LoadingPage";
 import { WeatherForecastComponent } from "./WeatherForecastComponent";
 
 export let apiContext = createContext(null);
+export let formattedDateContext = createContext(null);
 
 export const WeatherComponent = () => {
   const [APIResults, setAPIResults] = useState(null);
@@ -20,6 +21,7 @@ export const WeatherComponent = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         const long = position.coords.longitude;
         const lat = position.coords.latitude;
+
         let timestamp = new Date(position?.timestamp);
 
         let options = {
@@ -32,6 +34,7 @@ export const WeatherComponent = () => {
         const formattedDate = new Intl.DateTimeFormat("en-us", options).format(
           new Date(timestamp)
         );
+
         setFormattedDate(formattedDate);
 
         fetch(
@@ -52,6 +55,7 @@ export const WeatherComponent = () => {
       });
     }
   }, []);
+
   return loading === true ? (
     <LoadingPage />
   ) : (
@@ -70,38 +74,14 @@ export const WeatherComponent = () => {
         }
       >
         <apiContext.Provider value={{ APIResults }}>
-          <PrimaryComponent
-            weatherDescription={APIResults?.current?.condition?.text}
-            tempCelcius={APIResults?.current?.temp_c}
-            realFeelC={APIResults?.current?.feelslike_c}
-            weatherCode={APIResults?.current?.condition?.code}
-            isDay={APIResults?.current?.is_day}
-          />
+          <PrimaryComponent />
           <div className="secondary-weather-content-wrapper">
-            <SecondaryComponentA
-              placeName={APIResults?.location?.name}
-              country={APIResults?.location?.country}
-              region={APIResults?.location?.region}
-              // date={APIResults?.location?.localtime}
-              date={formattedDate}
-            />
-            <SecondaryComponentB
-              uv={APIResults?.current?.uv.toFixed(2)}
-              chanceOfRain={
-                APIResults?.forecast?.forecastday[0]?.day?.daily_chance_of_rain
-              }
-              humidity={APIResults?.current?.humidity}
-            />
+            <SecondaryComponentA date={formattedDate} />
+            <SecondaryComponentB />
           </div>
           <div className="astro-wrapper">
-            <AstroSun
-              sunrise={APIResults?.forecast?.forecastday[0]?.astro.sunrise}
-              sunset={APIResults?.forecast?.forecastday[0]?.astro.sunset}
-            />
-            <AstroMoon
-              moonrise={APIResults?.forecast?.forecastday[0]?.astro.moonrise}
-              moonset={APIResults?.forecast?.forecastday[0]?.astro.moonset}
-            />
+            <AstroSun />
+            <AstroMoon />
           </div>
           <WeatherForecastComponent />
         </apiContext.Provider>

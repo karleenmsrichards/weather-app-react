@@ -17,6 +17,7 @@ export const WeatherForecast = ({ day }) => {
     let slicedDate = replaceCommas.slice(0, 11);
     return slicedDate;
   }
+
   return (
     <div className="weather-days-wrapper weather-days-border-bottom">
       <p className="weather-days-day1-date">
