@@ -9,7 +9,7 @@ export const PrimaryComponent = () => {
   let weatherCondtion = WeatherConditions.filter(
     (item) => item.code === APIResults?.current?.condition?.code
   );
-
+  console.log(APIResults?.current?.condition?.text);
   const [weatherIcon] = weatherCondtion;
 
   return (

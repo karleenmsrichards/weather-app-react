@@ -7,8 +7,8 @@ export const WeatherForecast = ({ day }) => {
   const { APIResults } = useContext(apiContext);
 
   function findIcon(code) {
-    const forecast = WeatherConditions.find((item) => item.code === code);
-    return forecast.imageDay;
+    const icon = WeatherConditions.find((item) => item.code === code);
+    return icon.imageDay;
   }
 
   function formatDate(dateToBeFormatted) {

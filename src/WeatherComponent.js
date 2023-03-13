@@ -5,10 +5,11 @@ import { SecondaryComponentB } from "./SecondaryComponentB";
 import { AstroSun } from "./AstroSun.js";
 import { AstroMoon } from "./AstroMoon.js";
 import { LoadingPage } from "./LoadingPage";
+// import { LocationFinder } from "./LocationFinder";
+
 import { WeatherForecastComponent } from "./WeatherForecastComponent";
 
 export let apiContext = createContext(null);
-export let formattedDateContext = createContext(null);
 
 export const WeatherComponent = () => {
   const [APIResults, setAPIResults] = useState(null);
@@ -84,6 +85,7 @@ export const WeatherComponent = () => {
             <AstroMoon />
           </div>
           <WeatherForecastComponent />
+          {/* <LocationFinder /> */}
         </apiContext.Provider>
       </div>
     </div>
