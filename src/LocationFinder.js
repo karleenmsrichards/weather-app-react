@@ -1,22 +1,18 @@
-import { useState } from "react";
-// import { LocationComponent } from "./LocationComponent";
+import { useRef, useState } from "react";
+import { LocationInfo } from "./LocationInfo";
 
-export const LocationFinder = () => {
-  // const [data, setData] = useState(null);
-  const [inputValue, setInputValue] = useState("");
-
-  function handleSearch(event) {
-    // console.log(event.target.value);
-    setInputValue(event.target.value);
-  }
+export const LocationFinder = ({ addLocation, setVisible }) => {
+  const searchInput = useRef(null);
+  const [searchString, setSearchString] = useState("");
 
   function handleSubmit(event) {
-    // console.log(event.target.value);
     event.preventDefault();
+    console.log(searchInput.current);
+    setSearchString(searchInput.current.value);
   }
 
   return (
-    <div className="location-finder-wrapper">
+    <div>
       <h2 className="location-finder-title" htmlFor="">
         Weather
       </h2>
@@ -27,22 +23,34 @@ export const LocationFinder = () => {
           </label>
           <input
             type="text"
-            onChange={handleSearch}
+            ref={searchInput}
             id="search-place"
             className="form-control-input"
-            placeholder="enter a place"
-            value={inputValue}
+            placeholder="  enter a place..."
           />
         </div>
-        <div>
-          <button className="location-finder-form-btn" onClick={handleSearch}>
-            Search
-          </button>
+        <div className="location-finder-btn-wrapper">
+          <button className="location-finder-form-btn">Search</button>
         </div>
       </form>
-      {/* <LocationComponent className={"location-component-California"} />
-      <LocationComponent className={"location-component-Tokyo"} />
-      <LocationComponent className={"location-component-Trinidad"} /> */}
+      <div>
+        {searchString && (
+          <>
+            <button
+              className="location-finder-add-btn"
+              onClick={() => {
+                addLocation(searchString);
+                setVisible(true);
+              }}
+            >
+              Add to favourites
+            </button>
+            <LocationInfo
+              url={`https://api.weatherapi.com/v1/forecast.json?key=%204c0e921f27e842289ef203706230803&q=${searchString}&days=6&aqi=no&alerts=no`}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 };

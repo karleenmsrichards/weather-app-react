@@ -1,38 +1,15 @@
 import React from "react";
-import { useContext } from "react";
-import { apiContext } from "./WeatherComponent";
-import WeatherConditions from "./WeatherCondition.json";
+import { WeatherForecastDay } from "./WeatherForecastDay";
 
-export const WeatherForecast = ({ day }) => {
-  const { APIResults } = useContext(apiContext);
-
-  function findIcon(code) {
-    const icon = WeatherConditions.find((item) => item.code === code);
-    return icon.imageDay;
-  }
-
-  function formatDate(dateToBeFormatted) {
-    const date = new Date(dateToBeFormatted).toUTCString();
-    let replaceCommas = date.replaceAll(",", " ");
-    let slicedDate = replaceCommas.slice(0, 11);
-    return slicedDate;
-  }
-
+export const WeatherForecast = () => {
   return (
-    <div className="weather-days-wrapper weather-days-border-bottom">
-      <p className="weather-days-day1-date">
-        {formatDate(APIResults?.forecast?.forecastday[day]?.date)}
-      </p>
-      <img
-        className="weather-days-icon"
-        src={findIcon(
-          APIResults?.forecast?.forecastday[day]?.day.condition.code
-        )}
-        alt="weather icon"
-      />
-      <p className="weather-days-temp">
-        {APIResults?.forecast?.forecastday[day]?.day.avgtemp_c}°
-      </p>
+    <div className="weather-forecast-content">
+      <p className="weather-forecast-title">5-Day Weather Forecast</p>
+      <WeatherForecastDay day="1" />
+      <WeatherForecastDay day="2" />
+      <WeatherForecastDay day="3" />
+      <WeatherForecastDay day="4" />
+      <WeatherForecastDay day="5" />
     </div>
   );
 };
