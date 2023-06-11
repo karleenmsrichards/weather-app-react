@@ -26,7 +26,8 @@ export const Location = () => {
             handleRemoveLocation={handleRemoveLocation}
             location={location}
             key={location}
-            url={`https://api.weatherapi.com/v1/forecast.json?key=%204c0e921f27e842289ef203706230803&q=${location}&days=6&aqi=no&alerts=no`}
+            url={`https://api.weatherapi.com/v1/forecast.json?key=%20
+            ${API_KEY}&q=${location}&days=6&aqi=no&alerts=no`}
           />
         </div>
       ))}
