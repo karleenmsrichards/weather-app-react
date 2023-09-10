@@ -12,6 +12,7 @@ import { Footer } from "./Footer";
 export let apiContext = createContext(null);
 
 function App() {
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [APIResults, setAPIResults] = useState(null);
 
   const [loading, setLoading] = useState(true);
@@ -39,8 +40,7 @@ function App() {
         setFormattedDate(formattedDate);
 
         fetch(
-          // `https://api.weatherapi.com/v1/forecast.json?key=%204c0e921f27e842289ef203706230803&q=${lat},${long}&days=6&aqi=no&alerts=no`
-          `https://api.weatherapi.com/v1/forecast.json?key=%20${API_KEY}&q=${lat},${long}&days=6&aqi=no&alerts=no`
+          `https://api.weatherapi.com/v1/forecast.json?key=%20${apiKey}&q=${lat},${long}&days=6&aqi=no&alerts=no`
         )
           .then((response) => {
             if (!response.ok) {
@@ -56,7 +56,7 @@ function App() {
           .catch((err) => err);
       });
     }
-  }, []);
+  }, [apiKey]);
 
   return loading === true ? (
     <LoadingPage />
@@ -75,7 +75,7 @@ function App() {
             : "day-background"
         }
       >
-        <apiContext.Provider value={{ APIResults }}>
+        <apiContext.Provider value={{ APIResults, apiKey }}>
           <CurrentTemperature />
           <div className="current-weather-content-wrapper">
             <CurrentLocation date={formattedDate} />
